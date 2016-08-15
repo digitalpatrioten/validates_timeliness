@@ -64,7 +64,7 @@ module ValidatesTimeliness
       raw_value = attribute_raw_value(record, attr_name) || value
       return if (@allow_nil && raw_value.nil?) || (@allow_blank && raw_value.blank?)
 
-      @timezone_aware = timezone_aware?(record, attr_name)
+      @timezone_aware = timezone_aware?(record, attr_name) rescue false
       value = parse(raw_value) if value.is_a?(String) || options[:format]
       value = type_cast_value(value, @type)
 
